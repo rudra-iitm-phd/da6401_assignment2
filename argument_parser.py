@@ -52,7 +52,7 @@ parser.add_argument('-s', '--stride',
                   help = 'Stride to be performed in each layer')
 
 parser.add_argument('-d', '--dense', 
-                  type = int, default = [256], nargs = '+',
+                  type = int, default = [64], nargs = '+',
                   help = 'Number of neurons in each dense layer')
 
 parser.add_argument('-k', '--kernel', 

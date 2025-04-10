@@ -117,20 +117,21 @@ class CNN(nn.Module):
 
             for i,j in enumerate(self.cnn.keys()):
                   x = self.activations[self.conv_activations[i]](self.cnn[j]['conv'](x))
-                  print(x.shape)
+                  # print(x.shape)
                   if self.batch_norm:
                         x = self.cnn[j]['batch_norm'](x)
                   x = self.cnn[j]['pool'](x)
-                  print(x.shape)
+                  # print(x.shape)
                   
-            x = x.view(self.batch_size, -1)
+            x = x.view(x.size(0), -1)
             for i,j in enumerate(self.dense.keys()):
                   if i == len(self.dense.keys()) - 1:
-                        x = F.softmax(self.dense[j]['linear'](x), dim = -1)
+                        x = F.log_softmax(self.dense[j]['linear'](x), dim = -1)
                   else:
                         x = self.activations[self.dense_activation[i]](self.dense[j]['linear'](x))
                   if self.dropout:
                         x = self.dense[j]['dropout'](x)
+            
 
             return x
 

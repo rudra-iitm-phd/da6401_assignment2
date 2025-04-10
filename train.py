@@ -5,11 +5,9 @@ import matplotlib.pyplot as plt
 from cnn import CNN
 from configuration import Configure
 import torch
+from tqdm.auto import tqdm
 
-TRAIN_PATH = '../inaturalist_12K/train'
-TEST_PATH = '../inaturalist_12K/val'
 
-DEVICE = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
 def train(train_dl, val_dl, test_dl, model, optim, criterion, epochs, device='cpu'):
@@ -24,24 +22,59 @@ def train(train_dl, val_dl, test_dl, model, optim, criterion, epochs, device='cp
       acc = 0
 
       for epoch in range(epochs):
-            for images, labels in (train_dl):
-                  images = images.to(device, non_blocking = True)
-                  labels = labels.to(device, non_blocking = True)
+            for images, labels in tqdm(train_dl):
+
+                  images = images.to(device)
+                  labels = labels.to(device)
+
                   optimizer.zero_grad()
                   outputs = model(images)
+
                   loss = loss_fn(outputs, labels)
+
                   loss.backward()
+
                   optimizer.step()
 
+                  
                   running_loss += loss.item()
-            print(running_loss)
+
+            
+            print(loss.item())
+            running_loss = 0
+
+            model.eval()
+            correct = 0
+            total = 0
+            with torch.no_grad():
+                  for images, labels in tqdm(val_dl):
+                        images = images.to(device)
+                        labels = labels.to(device)
+                        outputs = model(images)
+                        _, preds = torch.max(outputs, dim=1)
+                        correct += (labels == preds).sum().item()
+                        total += labels.size(0)
+            print(f'Validation accuracy : {round(correct/total*100, 2)}')
+            model.train()
+
+            
+            
+
+
 
 
 if __name__ == '__main__':
 
+      TRAIN_PATH = '../inaturalist_12K/train'
+      TEST_PATH = '../inaturalist_12K/val'
+
+      DEVICE = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
+
       args = parser.parse_args()
 
       config = args.__dict__
+
+      print("Parsing DONE !!")
 
       d = Data(train_path=TRAIN_PATH, test_path=TEST_PATH, resize=(config['resize'],config['resize']), batch_size=config['batch_size'], train_test_split=0.8, augment=config['augment'])
 
@@ -82,16 +115,21 @@ if __name__ == '__main__':
 
 
       c = Configure()
+
+      print(train_dl.batch_size)
+
       model , optim, loss = c.configure(script)
       model.view_model_summary()
       pytorch_total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
       print(f"Total number of parameters : {pytorch_total_params}")
 
-      model(x_train)
+      # model(x_train)
+
+      
 
       # print(model.cnn)
 
-      # train(train_dl, val_dl, test_dl, model, optim, loss, 10, DEVICE)
+      train(train_dl, val_dl, test_dl, model, optim, loss, 10, DEVICE)
 
       # model.layerwise_visualise(x_train)
 

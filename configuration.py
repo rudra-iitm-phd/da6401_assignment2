@@ -19,7 +19,7 @@ class Configure:
 
             optim = self.optimizers[script['optimizer']]
 
-            loss = torch.nn.CrossEntropyLoss
+            loss = torch.nn.NLLLoss
 
             return model, optim, loss
 
