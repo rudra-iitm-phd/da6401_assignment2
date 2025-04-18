@@ -60,6 +60,10 @@ def train(log=True , sweep=True):
 
             "xavier_init":config['xavier_init'],
 
+            "use_pretrained":config['use_pretrained'],
+
+            "pk":config['pretrained_k']
+
       }
 
       c = Configure()
@@ -67,7 +71,11 @@ def train(log=True , sweep=True):
       print(train_dl.batch_size)
 
       model,  criterion = c.configure(script)
-      model.view_model_summary()
+
+      if config['use_pretrained']:
+            print(model)
+      else:
+            model.view_model_summary()
       pytorch_total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
       print(f"Total number of parameters : {pytorch_total_params}")
       
@@ -157,7 +165,6 @@ if __name__ == '__main__':
                   sweep_id = args.sweep_id
 
             wandb.agent(sweep_id, function=train, count=20)
-            # wandb.config.update({"sweep_name": create_name(wandb.config)})
             wandb.finish()
       elif args.wandb:
             train(log = True, sweep = False)
@@ -169,16 +176,6 @@ if __name__ == '__main__':
 
 
 
-
-                  
-      # elif args.wandb:
-      #       with wandb.init(entity = config['wandb_entity'],project = config['wandb_project'], name = create_name(config), config = config):
-      #             train(train_dl, val_dl, test_dl, model, loss, 15, wandb, DEVICE)
-      #       wandb.finish()
-      # elif not args.wandb:
-      #             train(train_dl, val_dl, test_dl, model, loss, 15, None, DEVICE)
-
-      
 
       
 

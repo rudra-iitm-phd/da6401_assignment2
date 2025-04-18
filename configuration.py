@@ -1,6 +1,7 @@
 import shared
 from cnn import CNN 
 import torch
+from vision_models import PretrainedResnet50
 
 class Configure:
       def __init__(self):
@@ -13,6 +14,8 @@ class Configure:
                   'adamax':torch.optim.Adamax
             }
 
+            self.trainable = ['fc', 'layer3', 'layer2']
+
       def configure_optim(self, model, optim:str, lr:float, weight_decay:float, momentum=0.9):
             optimizer = self.optimizers[optim]
             if optim in ['adam', 'nadam', 'adamw', 'adamax']:
@@ -23,7 +26,11 @@ class Configure:
 
       def configure(self, script):
 
-            model = CNN(script['input_size'], script['output_size'], script['filters'], script['padding_config'], script['stride_config'], script['dense_config'], script['conv_activation'], script['dense_activation'], script['kernel_config'], script['batch_size'], script['batch_norm'], script['dropout'], script['xavier_init'])
+            if not script['use_pretrained']:
+                  model = CNN(script['input_size'], script['output_size'], script['filters'], script['padding_config'], script['stride_config'], script['dense_config'], script['conv_activation'], script['dense_activation'], script['kernel_config'], script['batch_size'], script['batch_norm'], script['dropout'], script['xavier_init'])
+            else:
+
+                  model = PretrainedResnet50(output_size = script['output_size'], trainable_layers = script['pk']).get_model()
 
             loss = torch.nn.CrossEntropyLoss
 
