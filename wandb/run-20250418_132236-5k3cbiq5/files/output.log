@@ -1,0 +1,48 @@
+32
+['leaky_relu', 'leaky_relu', 'leaky_relu', 'leaky_relu', 'leaky_relu']
+['leaky_relu']
+Convolutions
+
+Block 0
+Convolution : Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+Activation : leaky_relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 112 X 112 X 32
+
+Block 1
+Convolution : Conv2d(32, 16, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+Activation : leaky_relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 56 X 56 X 16
+
+Block 2
+Convolution : Conv2d(16, 8, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+Activation : leaky_relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 28 X 28 X 8
+
+Block 3
+Convolution : Conv2d(8, 4, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+Activation : leaky_relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 14 X 14 X 4
+
+Block 4
+Convolution : Conv2d(4, 2, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+Activation : leaky_relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 7 X 7 X 2
+
+Dense
+
+Linear : Linear(in_features=98, out_features=128, bias=True)
+Activation : leaky_relu
+
+Linear : Linear(in_features=128, out_features=10, bias=True)
+Activation : Softmax
+
+Total number of parameters : 33424
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 250/250 [01:34<00:00,  2.65it/s]
+2.265439033508301
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 63/63 [00:59<00:00,  1.06it/s]
+Validation accuracy : 15.25

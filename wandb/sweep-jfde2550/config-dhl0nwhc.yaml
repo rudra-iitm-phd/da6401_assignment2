@@ -1,0 +1,38 @@
+wandb_version: 1
+
+augment:
+  value: true
+batch_norm:
+  value: true
+batch_size:
+  value: 32
+conv_activation:
+  value: leaky_relu
+dense:
+  value:
+  - 32
+dense_activation:
+  value: relu
+dropout:
+  value: 0.3
+filter_initial:
+  value: 32
+filter_strategy:
+  value: same
+kernel:
+  value:
+  - 3
+  - 3
+  - 3
+  - 3
+  - 3
+learning_rate:
+  value: 0.0012240599378626656
+momentum:
+  value: 0.8141576738159393
+optimizer:
+  value: adamw
+resize:
+  value: 128
+weight_decay:
+  value: 0.003926131805758411

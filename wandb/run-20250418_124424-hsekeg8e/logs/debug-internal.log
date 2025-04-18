@@ -1,0 +1,11 @@
+{"time":"2025-04-18T12:44:24.389309+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_124424-hsekeg8e/logs/debug-core.log"}
+{"time":"2025-04-18T12:44:24.52353+05:30","level":"INFO","msg":"created new stream","id":"hsekeg8e"}
+{"time":"2025-04-18T12:44:24.523722+05:30","level":"INFO","msg":"stream: started","id":"hsekeg8e"}
+{"time":"2025-04-18T12:44:24.523773+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"hsekeg8e"}
+{"time":"2025-04-18T12:44:24.523889+05:30","level":"INFO","msg":"sender: started","stream_id":"hsekeg8e"}
+{"time":"2025-04-18T12:44:24.523715+05:30","level":"INFO","msg":"handler: started","stream_id":"hsekeg8e"}
+{"time":"2025-04-18T12:44:24.956128+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T12:46:32.261253+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T12:46:32.277028+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T12:46:32.649967+05:30","level":"INFO","msg":"stream: closing","id":"hsekeg8e"}
+{"time":"2025-04-18T12:46:32.827166+05:30","level":"WARN","msg":"sender: received Exit record more than once, ignoring"}

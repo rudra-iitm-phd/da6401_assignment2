@@ -1,0 +1,103 @@
+_wandb:
+    value:
+        cli_version: 0.19.7
+        m: []
+        python_version: 3.12.3
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 55
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 55
+            "3":
+                - 2
+                - 13
+                - 14
+                - 16
+                - 23
+                - 55
+            "4": 3.12.3
+            "5": 0.19.7
+            "6": 4.42.3
+            "8":
+                - 2
+                - 5
+            "12": 0.19.7
+            "13": darwin-x86_64
+augment:
+    value: false
+batch_norm:
+    value: false
+batch_size:
+    value: 32
+conv_activation:
+    value: silu
+dense:
+    value:
+        - 512
+dense_activation:
+    value: mish
+dropout:
+    value: 0.5
+filter_automated:
+    value: true
+filter_initial:
+    value: 64
+filter_manual:
+    value:
+        - 16
+        - 32
+        - 64
+        - 128
+        - 256
+filter_strategy:
+    value: same
+kernel:
+    value:
+        - 5
+        - 5
+        - 5
+        - 5
+        - 5
+learning_rate:
+    value: 0.0006474102879962732
+momentum:
+    value: 0.8744984220569143
+n_convolutions:
+    value: 5
+n_dense:
+    value: 1
+optimizer:
+    value: rmsprop
+padding:
+    value: true
+resize:
+    value: 32
+stride:
+    value:
+        - 1
+        - 1
+        - 1
+        - 1
+        - 1
+sweep_id:
+    value: null
+wandb:
+    value: false
+wandb_entity:
+    value: da24d008-iit-madras
+wandb_project:
+    value: da6401-assignment2
+wandb_sweep:
+    value: true
+weight_decay:
+    value: 0.0028323764735565192
+xavier_init:
+    value: false

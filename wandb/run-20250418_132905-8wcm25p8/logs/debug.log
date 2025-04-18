@@ -1,0 +1,31 @@
+2025-04-18 13:29:05,755 INFO    Thread-2 (_run_job):60662 [wandb_setup.py:_flush():67] Current SDK version is 0.19.7
+2025-04-18 13:29:05,755 INFO    Thread-2 (_run_job):60662 [wandb_setup.py:_flush():67] Configure stats pid to 60662
+2025-04-18 13:29:05,755 INFO    Thread-2 (_run_job):60662 [wandb_setup.py:_flush():67] Loading settings from /Users/rudra_sarkar/.config/wandb/settings
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_setup.py:_flush():67] Loading settings from /Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/settings
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:setup_run_log_directory():647] Logging user logs to /Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_132905-8wcm25p8/logs/debug.log
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to /Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_132905-8wcm25p8/logs/debug-internal.log
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():761] calling init triggers
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():766] wandb.init called with sweep_config: {'augment': True, 'batch_norm': True, 'batch_size': 64, 'conv_activation': 'gelu', 'dense': [512], 'dense_activation': 'leaky_relu', 'dropout': 0.1, 'filter_initial': 64, 'filter_strategy': 'doubled', 'kernel': [5, 5, 3, 3, 3], 'learning_rate': 0.0005437861534316687, 'momentum': 0.923087388297848, 'optimizer': 'adam', 'resize': 64, 'weight_decay': 0.008935689859547959}
+config: {'batch_size': 32, 'resize': 128, 'filter_automated': True, 'filter_strategy': 'doubled', 'filter_initial': 32, 'n_convolutions': 5, 'filter_manual': [16, 32, 64, 128, 256], 'padding': True, 'stride': [1, 1, 1, 1, 1], 'dense': [64], 'kernel': [3, 3, 3, 3, 3], 'conv_activation': 'relu', 'dense_activation': 'relu', 'n_dense': 1, 'optimizer': 'adam', 'augment': False, 'batch_norm': False, 'learning_rate': 0.001, 'momentum': 0.9, 'weight_decay': 0, 'dropout': 0, 'xavier_init': False, 'wandb': False, 'wandb_entity': 'da24d008-iit-madras', 'wandb_project': 'da6401-assignment2', 'wandb_sweep': True, 'sweep_id': None, '_wandb': {}}
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():784] starting backend
+2025-04-18 13:29:05,756 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():788] sending inform_init request
+2025-04-18 13:29:06,127 INFO    Thread-2 (_run_job):60662 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2025-04-18 13:29:06,127 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():803] backend started and connected
+2025-04-18 13:29:06,129 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_config_callback():1261] config_cb None None {'augment': True, 'batch_norm': True, 'batch_size': 64, 'conv_activation': 'gelu', 'dense': [512], 'dense_activation': 'leaky_relu', 'dropout': 0.1, 'filter_initial': 64, 'filter_strategy': 'doubled', 'kernel': [5, 5, 3, 3, 3], 'learning_rate': 0.0005437861534316687, 'momentum': 0.923087388297848, 'optimizer': 'adam', 'resize': 64, 'weight_decay': 0.008935689859547959}
+2025-04-18 13:29:06,131 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():896] updated telemetry
+2025-04-18 13:29:06,154 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():920] communicating run to backend with 90.0 second timeout
+2025-04-18 13:29:06,840 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():995] starting run threads in backend
+2025-04-18 13:29:07,027 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_console_start():2377] atexit reg
+2025-04-18 13:29:07,028 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-04-18 13:29:07,028 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-04-18 13:29:07,028 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_redirect():2317] Redirects installed.
+2025-04-18 13:29:07,030 INFO    Thread-2 (_run_job):60662 [wandb_init.py:init():1037] run started, returning control to user process
+2025-04-18 13:30:19,277 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_finish():2112] finishing run da24d008-iit-madras/da6401-assignment2/8wcm25p8
+2025-04-18 13:30:19,279 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_atexit_cleanup():2342] got exitcode: 1
+2025-04-18 13:30:19,279 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_restore():2324] restore
+2025-04-18 13:30:19,279 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_restore():2330] restore done
+2025-04-18 13:30:22,133 INFO    MsgRouterThr:60662 [mailbox.py:close():115] Closing mailbox, abandoning 1 handles.
+2025-04-18 13:30:22,136 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_footer_history_summary_info():3958] rendering history
+2025-04-18 13:30:22,136 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_footer_history_summary_info():3990] rendering summary
+2025-04-18 13:30:22,137 INFO    Thread-2 (_run_job):60662 [wandb_run.py:_footer_sync_info():3919] logging synced files

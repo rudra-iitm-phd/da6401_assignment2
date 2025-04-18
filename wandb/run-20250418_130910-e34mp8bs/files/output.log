@@ -1,0 +1,80 @@
+64
+['silu', 'silu', 'silu', 'silu', 'silu']
+['gelu']
+/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/init.py:452: UserWarning: Initializing zero-element tensors is a no-op
+  warnings.warn("Initializing zero-element tensors is a no-op")
+Convolutions
+
+Block 0
+Convolution : Conv2d(3, 16, kernel_size=(5, 5), stride=(1, 1), padding=(1, 1))
+Batch Norm : BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Activation : silu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 31 X 31 X 16
+
+Block 1
+Convolution : Conv2d(16, 8, kernel_size=(5, 5), stride=(1, 1), padding=(1, 1))
+Batch Norm : BatchNorm2d(8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Activation : silu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 14 X 14 X 8
+
+Block 2
+Convolution : Conv2d(8, 4, kernel_size=(5, 5), stride=(1, 1), padding=(1, 1))
+Batch Norm : BatchNorm2d(4, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Activation : silu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 6 X 6 X 4
+
+Block 3
+Convolution : Conv2d(4, 2, kernel_size=(5, 5), stride=(1, 1), padding=(1, 1))
+Batch Norm : BatchNorm2d(2, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Activation : silu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 2 X 2 X 2
+
+Block 4
+Convolution : Conv2d(2, 1, kernel_size=(5, 5), stride=(1, 1), padding=(1, 1))
+Batch Norm : BatchNorm2d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Activation : silu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 0 X 0 X 1
+
+Dense
+
+Linear : Linear(in_features=0, out_features=1024, bias=True)
+Activation : gelu
+
+Dropout : Dropout(p=0.5, inplace=False)
+Batch Norm : BatchNorm1d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+Linear : Linear(in_features=1024, out_features=10, bias=True)
+Activation : Softmax
+
+Total number of parameters : 18865
+  0%|                                                                                                                                 | 0/250 [00:34<?, ?it/s]
+Traceback (most recent call last):
+  File "/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/train.py", line 90, in train
+    outputs = model(images)
+              ^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/cnn.py", line 130, in forward
+    x = (self.cnn[j]['conv'](x))
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Calculated padded input size per channel: (4 x 4). Kernel size: (5 x 5). Kernel size can't be greater than actual input size

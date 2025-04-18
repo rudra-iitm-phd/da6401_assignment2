@@ -1,0 +1,35 @@
+wandb_version: 1
+
+activation:
+  value: leaky_relu
+augment:
+  value: true
+batch_norm:
+  value: true
+batch_size:
+  value: 128
+dense:
+  value: 256
+dropout:
+  value: 0
+filter_initial:
+  value: 64
+filter_strategy:
+  value: same
+kernel:
+  value:
+  - 5
+  - 5
+  - 3
+  - 3
+  - 3
+learning_rate:
+  value: 0.0018447170985758392
+momentum:
+  value: 0.8705275518791407
+optimizer:
+  value: nadam
+resize:
+  value: 64
+weight_decay:
+  value: 0.005517339735500722

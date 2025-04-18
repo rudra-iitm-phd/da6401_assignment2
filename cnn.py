@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class CNN(nn.Module):
-      def __init__(self, input_size, output_size, filters:list, padding_config:list, stride_config:list, dense_config:list, conv_activation:list, dense_activation:list, kernel_config:list, batch_size:int, batch_norm:bool, dropout:bool):
+      def __init__(self, input_size, output_size, filters:list, padding_config:list, stride_config:list, dense_config:list, conv_activation:list, dense_activation:list, kernel_config:list, batch_size:int, batch_norm:bool, dropout:float, xavier_init:bool):
             super(CNN, self).__init__()
 
             self.filter_config = filters # the number of filters for each convolution layer
@@ -18,14 +18,13 @@ class CNN(nn.Module):
             self.kernel_config = kernel_config # size of the kernel for each convolutional layer
             self.batch_size = batch_size # size of the batch eg : 32, 64
             self.conv_activations = conv_activation # activation functions used for convolutional blocks
+            print(self.conv_activations)
             self.dense_activation = dense_activation # activation function used for fully connected networks
+            print(self.dense_activation)
             self.batch_norm = batch_norm # Boolean value, True if user opts for batch normalisation
             self.dropout = dropout # Boolean value, True if user opts for dropout
 
             self.info = dict()
-
-            self.cnn = self.generate_cnn() # generate the convolutional blocks
-            self.dense = self.generate_dense() # generate the fully connected layers
 
             self.activations = {
                   'relu':F.relu,
@@ -38,8 +37,14 @@ class CNN(nn.Module):
                   'leaky_relu':F.leaky_relu
             }
 
-            
+            self.cnn = self.generate_cnn() # generate the convolutional blocks
+            self.dense = self.generate_dense() # generate the fully connected layers
 
+            if xavier_init:
+                  self.cnn = self.xavier_init(self.cnn)
+                  self.dense = self.xavier_init(self.dense)
+
+            
 
       def generate_cnn(self) -> dict:
 
@@ -61,7 +66,7 @@ class CNN(nn.Module):
                         architecture[f'Block {i}']['conv'] = nn.Conv2d(in_channels = self.input_channel, out_channels = j, stride = self.stride_config[i], padding = self.padding_config[i], kernel_size = self.kernel_config[i])
 
                         if self.batch_norm:
-                              architecture[f'Block {i}']['batch_norm'] = nn.BatchNorm2d(self.input_channel)
+                              architecture[f'Block {i}']['batch_norm'] = nn.BatchNorm2d(j)
 
                         self.info[i]['op_size'] = ((self.input_size[-1] - self.kernel_config[i] + 2*self.padding_config[i])//self.stride_config[i] + 1)
 
@@ -97,8 +102,8 @@ class CNN(nn.Module):
                   else:
                         architecture[f'Layer {i}']['linear'] = nn.Linear(self.dense_config[i-1], j)
 
-                  if self.dropout:
-                        architecture[f'Layer {i}']['dropout'] = nn.Dropout(0.5)
+                  if self.dropout > 0:
+                        architecture[f'Layer {i}']['dropout'] = nn.Dropout(self.dropout)
                   if self.batch_norm:
                         architecture[f'Layer {i}']['batch_norm'] = nn.BatchNorm1d(j)
             
@@ -106,6 +111,12 @@ class CNN(nn.Module):
             architecture[f'Layer {i+1}']['linear'] = nn.Linear(self.dense_config[-1], self.output_size)
                         
             return architecture
+
+      def xavier_init(self, model):
+            for p in model.parameters():
+                  if len(p.shape) > 1:
+                        nn.init.xavier_uniform_(p)
+            return model
 
       def forward(self, x):
 
@@ -116,20 +127,24 @@ class CNN(nn.Module):
             '''
 
             for i,j in enumerate(self.cnn.keys()):
-                  x = self.activations[self.conv_activations[i]](self.cnn[j]['conv'](x))
+                  x = (self.cnn[j]['conv'](x))
                   # print(x.shape)
                   if self.batch_norm:
                         x = self.cnn[j]['batch_norm'](x)
+
+                  x = self.activations[self.conv_activations[i]](x)
+
                   x = self.cnn[j]['pool'](x)
                   # print(x.shape)
                   
             x = x.view(x.size(0), -1)
             for i,j in enumerate(self.dense.keys()):
                   if i == len(self.dense.keys()) - 1:
-                        x = F.log_softmax(self.dense[j]['linear'](x), dim = -1)
+                        # x = F.log_softmax(self.dense[j]['linear'](x), dim = -1)
+                        x = self.dense[j]['linear'](x)
                   else:
                         x = self.activations[self.dense_activation[i]](self.dense[j]['linear'](x))
-                  if self.dropout:
+                  if self.dropout > 0 and 'dropout' in self.dense[j].keys():
                         x = self.dense[j]['dropout'](x)
             
 
@@ -176,9 +191,9 @@ class CNN(nn.Module):
             for i in self.cnn.keys():
                   print(i)
                   print(f'Convolution : {self.cnn[i]["conv"]}')
-                  print(f'Activation : {self.conv_activations[int(i[-1])]}')
                   if self.batch_norm:
                         print(f'Batch Norm : {self.cnn[i]["batch_norm"]}' )
+                  print(f'Activation : {self.conv_activations[int(i[-1])]}')
                   print(f'Pooling :{self.cnn[i]["pool"]}')
                   print(f'Output size : {self.info[int(i[-1])]["op_size"]} X {self.info[int(i[-1])]["op_size"]} X {self.filter_config[int(i[-1])]}\n')
                   

@@ -1,0 +1,16 @@
+{"time":"2025-04-18T13:21:06.144605+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_132106-7smvtkm6/logs/debug-core.log"}
+{"time":"2025-04-18T13:21:06.270265+05:30","level":"INFO","msg":"created new stream","id":"7smvtkm6"}
+{"time":"2025-04-18T13:21:06.270325+05:30","level":"INFO","msg":"stream: started","id":"7smvtkm6"}
+{"time":"2025-04-18T13:21:06.270404+05:30","level":"INFO","msg":"sender: started","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:21:06.270426+05:30","level":"INFO","msg":"handler: started","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:21:06.270522+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:21:06.891868+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T13:22:27.871741+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T13:22:27.875173+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T13:22:28.897795+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.405409584,"progress":"3.1KB/3.1KB"},{"desc":"uploading config.yaml","runtime_seconds":0.093898958,"progress":"1.6KB/1.6KB"}],"total_operations":2}}
+{"time":"2025-04-18T13:22:29.356516+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-18T13:22:31.042617+05:30","level":"INFO","msg":"stream: closing","id":"7smvtkm6"}
+{"time":"2025-04-18T13:22:31.042663+05:30","level":"INFO","msg":"handler: closed","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:22:31.043224+05:30","level":"INFO","msg":"sender: closed","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:22:31.043017+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"7smvtkm6"}
+{"time":"2025-04-18T13:22:31.043721+05:30","level":"INFO","msg":"stream: closed","id":"7smvtkm6"}

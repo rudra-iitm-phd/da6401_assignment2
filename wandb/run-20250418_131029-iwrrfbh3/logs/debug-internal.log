@@ -1,0 +1,11 @@
+{"time":"2025-04-18T13:10:30.003142+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_131029-iwrrfbh3/logs/debug-core.log"}
+{"time":"2025-04-18T13:10:30.145567+05:30","level":"INFO","msg":"created new stream","id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:30.145628+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:30.145657+05:30","level":"INFO","msg":"sender: started","stream_id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:30.145789+05:30","level":"INFO","msg":"stream: started","id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:30.14563+05:30","level":"INFO","msg":"handler: started","stream_id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:30.671069+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T13:10:54.139241+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T13:10:54.142579+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T13:10:54.568161+05:30","level":"INFO","msg":"stream: closing","id":"iwrrfbh3"}
+{"time":"2025-04-18T13:10:54.568166+05:30","level":"WARN","msg":"sender: received Exit record more than once, ignoring"}

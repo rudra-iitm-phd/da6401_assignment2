@@ -1,0 +1,95 @@
+torch.Size([32, 3, 128, 128]) torch.Size([32])
+32
+['relu', 'relu', 'relu', 'relu', 'relu']
+['relu']
+Convolutions
+
+Block 0
+Convolution : Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+Activation : relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 64 X 64 X 32
+
+Block 1
+Convolution : Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+Activation : relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 32 X 32 X 64
+
+Block 2
+Convolution : Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+Activation : relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 16 X 16 X 128
+
+Block 3
+Convolution : Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+Activation : relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 8 X 8 X 256
+
+Block 4
+Convolution : Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+Activation : relu
+Pooling :MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+Output size : 4 X 4 X 512
+
+Dense
+
+Linear : Linear(in_features=8192, out_features=64, bias=True)
+Activation : relu
+
+Linear : Linear(in_features=64, out_features=10, bias=True)
+Activation : Softmax
+
+Total number of parameters : 2093578
+ 24%|█████████████████████████████▎                                                                                          | 61/250 [00:41<00:27,  6.84it/s]Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x1171768e0>
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1479, in __del__
+    self._shutdown_workers()
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+KeyboardInterrupt:
+ 24%|█████████████████████████████▎                                                                                          | 61/250 [00:42<02:12,  1.43it/s]
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x1171768e0>
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1479, in __del__
+    self._shutdown_workers()
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/multiprocessing/connection.py", line 1136, in wait
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt:
+Traceback (most recent call last):
+  File "/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/train.py", line 160, in <module>
+    wandb.agent(sweep_id, function=train(train_dl, val_dl, test_dl, model, loss, 15, wandb, DEVICE), count=20)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/train.py", line 42, in train
+    optimizer.step()
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/optimizer.py", line 385, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/optimizer.py", line 76, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/adam.py", line 166, in step
+    adam(
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/adam.py", line 316, in adam
+    func(params,
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/adam.py", line 423, in _single_tensor_adam
+    step = _get_value(step_t)
+           ^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/nlp_env/lib/python3.12/site-packages/torch/optim/optimizer.py", line 89, in _get_value
+    return x.item()
+           ^^^^^^^^
+KeyboardInterrupt

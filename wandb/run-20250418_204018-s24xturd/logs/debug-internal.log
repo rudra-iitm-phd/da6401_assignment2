@@ -1,0 +1,11 @@
+{"time":"2025-04-18T20:40:19.175122+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/rudra_sarkar/Documents/PhD IIT Madras/Intro to Deep Learning M Khapra DA6401/da6401 assignment 2/wandb/run-20250418_204018-s24xturd/logs/debug-core.log"}
+{"time":"2025-04-18T20:40:19.453616+05:30","level":"INFO","msg":"created new stream","id":"s24xturd"}
+{"time":"2025-04-18T20:40:19.453704+05:30","level":"INFO","msg":"stream: started","id":"s24xturd"}
+{"time":"2025-04-18T20:40:19.453718+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"s24xturd"}
+{"time":"2025-04-18T20:40:19.453957+05:30","level":"INFO","msg":"handler: started","stream_id":"s24xturd"}
+{"time":"2025-04-18T20:40:19.454027+05:30","level":"INFO","msg":"sender: started","stream_id":"s24xturd"}
+{"time":"2025-04-18T20:40:19.900667+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-18T20:42:22.073862+05:30","level":"INFO","msg":"stream: closing","id":"s24xturd"}
+{"time":"2025-04-18T20:42:22.075145+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-18T20:42:22.083157+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-18T20:42:23.085098+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
