@@ -30,7 +30,7 @@ parser.add_argument('-b', '--batch_size',
                   help = 'Batch size')
 
 parser.add_argument('-r_sz', '--resize', 
-                  type = int, default = 128, 
+                  type = int, default = 224, 
                   help = 'Number of epochs to train the agent')
 
 parser.add_argument('-f_a', '--filter_automated', 
@@ -42,7 +42,7 @@ parser.add_argument('-f_s', '--filter_strategy',
                   help = 'Choices for filter configuration strategy : same, doubled, halved')
 
 parser.add_argument('-f_i', '--filter_initial', 
-                  type = int, default = 32, 
+                  type = int, default = 16, 
                   help = 'Number of filters to be used in the first layer')
 
 parser.add_argument('-n_c', '--n_convolutions', 
@@ -62,7 +62,7 @@ parser.add_argument('-s', '--stride',
                   help = 'Stride to be performed in each layer')
 
 parser.add_argument('-d', '--dense', 
-                  type = int, default = [64], nargs = '+',
+                  type = int, default = [2048], nargs = '+',
                   help = 'Number of neurons in each dense layer')
 
 parser.add_argument('-k', '--kernel', 
@@ -70,7 +70,7 @@ parser.add_argument('-k', '--kernel',
                   help = 'Size of the kernel for each layer')
 
 parser.add_argument('-c_a', '--conv_activation', 
-                  type = str, default = 'relu',
+                  type = str, default = 'leaky_relu',
                   help = 'Choice of activation functions to be used for convolutions : relu ,gelu, sigmoid, silu, mish, tanh, relu6, leaky_relu')
 
 parser.add_argument('-d_a', '--dense_activation', 
@@ -82,32 +82,32 @@ parser.add_argument('-n_d', '--n_dense',
                   help = 'Number of dense layers')
 
 parser.add_argument('-o', '--optimizer', 
-                  type = str, default = 'adam',
+                  type = str, default = 'adamax',
                   help = 'Choices for optimizers : adam, sgd, nadam, adamw, rmsprop, adamax')
 
 parser.add_argument('-a', '--augment', 
-                  type = bool, default = False,
+                  type = bool, default = True,
                   help = 'Enable data augmentation')
 
 
 parser.add_argument('-b_n', '--batch_norm', 
-                  type = bool, default = False,
+                  type = bool, default = True,
                   help = 'Enable Batch Normalisation')
 
 parser.add_argument('-lr', '--learning_rate', 
-                  type = float, default = 0.001,
+                  type = float, default = 0.0012472342118893852,
                   help = 'Learning rate for optimizer')
 
 parser.add_argument('-m', '--momentum', 
-                  type = float, default = 0.9,
+                  type = float, default = 0.8490488109552309,
                   help = 'Momentum to be used by the optimizer')
 
 parser.add_argument('-w_d', '--weight_decay', 
-                  type = float, default = 0,
+                  type = float, default = 0.003738423338261432,
                   help = 'Value for weight decay or L2 Regularization')
 
 parser.add_argument('-d_o', '--dropout', 
-                  type = float, default = 0,
+                  type = float, default = 0.2,
                   help = 'Drop out rate for the dense layer')
 
 parser.add_argument('-xi', '--xavier_init', 
@@ -133,3 +133,7 @@ parser.add_argument('--use_pretrained', action='store_true', help='Use a pretrai
 parser.add_argument('-pk', '--pretrained_k', 
                   type = int, default = 1,
                   help = 'The last k layers for pre-training')
+
+parser.add_argument('-ut', '--use_test', 
+                  type = bool, default = False,
+                  help = 'Use test data')

@@ -8,6 +8,8 @@ import torch
 from tqdm.auto import tqdm
 import wandb
 import sweep_configuration
+from torchvision.utils import make_grid
+
 torch.multiprocessing.set_sharing_strategy('file_system')
 
 
@@ -112,6 +114,14 @@ def train(log=True , sweep=True):
             running_loss = 0
             train_acc = compute_accuracy(model, train_dl, device)
             val_acc = compute_accuracy(model, val_dl, device)
+            if config['use_test']:
+                  test_acc = compute_accuracy(model, test_dl, device)
+                  if log:
+                        wandb.log({
+                              "Test accuracy" : test_acc
+                        })
+
+                        infer(model, test_dl, device)
 
             if log:
             
@@ -121,7 +131,40 @@ def train(log=True , sweep=True):
                               "Train loss":round(loss.item(), 2)
                         })
             print(f'Train accuracy : {train_acc} Validation accuracy : {val_acc}')
-            # print(f'Validation accuracy : {val_acc}')
+      
+      
+
+def infer(model, dataloader, device='cpu'):
+      model.eval()
+      img_list, label_list, pred_list = [], [], []
+      with torch.no_grad:
+            for images, labels in tqdm(dataloader):
+                  images = images.to(device)
+                  labels = labels.to(device)
+                  outputs = model(images)
+                  _, preds = torch.max(outputs, dim=1)
+
+                  img_list.extend(images.cpu())
+                  label_list.extend(labels.cpu())
+                  pred_list.extend(preds.cpu())
+
+                  if len(img_list) >= 30:  
+                        break
+
+      table = wandb.Table(columns=["Image", "Prediction", "True Label"])
+      for idx, (img, pred, label) in enumerate(zip(img_list, pred_list, label_list)):
+            table.add_data(
+                  wandb.Image(img, caption=f"Pred: {shared.classes[pred]} | True: {shared.classes[label]}"),
+                  shared.classes[pred],
+                  shared.classes[label]
+            )
+      wandb.log({
+                  "Prediction Grid": wandb.Image(make_grid(images, nrow=3)),
+                  "Detailed Predictions": table
+                  })
+                                    
+            
+      
 
 def compute_accuracy(model, data_loader, device = 'cpu'):
       model.eval()

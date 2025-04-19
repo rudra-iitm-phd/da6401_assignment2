@@ -6,62 +6,11 @@ import matplotlib.pyplot as plt
 from copy import deepcopy
 from torchvision.datasets import DatasetFolder
 from PIL import Image
-from diskcache import Cache
 
 torch.multiprocessing.set_sharing_strategy('file_system')
 
 
 
-
-
-def pil_loader(path: str) -> Image.Image:
-    """Load image using PIL"""
-    return Image.open(path).convert("RGB")
-
-
-class LazyLoader(DatasetFolder):
-    def __init__(self, root, transform=None, cache_dir = "../cache"):
-        super().__init__(
-            root,
-            loader=pil_loader,
-            extensions=('jpg', 'jpeg', 'png'),
-            transform=transform
-        )
-        self.cache = Cache(cache_dir)
-    
-    def __getitem__(self, index):
-        path, target = self.samples[index]
-        try:
-            image = self.cache[path]
-        except KeyError:
-            image = self.loader(path)
-            self.cache[path] = image
-        if self.transform is not None:
-            image = self.transform(image)
-        return image, target
-
-# class CacheDataset(Dataset):
-#     def __init__(self, dataset):
-#         self.dataset = dataset
-#         self.cache = [None] * len(dataset)
-#         # Handle different dataset types
-#         if hasattr(dataset, 'dataset'):  # For Subset objects
-#             self.file_paths = [sample[0] for sample in dataset.dataset.samples]
-#             self.indices = dataset.indices
-#         else:  # For raw ImageFolder
-#             self.file_paths = [sample[0] for sample in dataset.samples]
-#             self.indices = range(len(dataset))
-#     def __getitem__(self, index):
-#         if self.cache[index] is None:
-#             # Use original index mapping
-#             original_idx = self.indices[index]
-#             with open(self.file_paths[original_idx], 'rb') as f:
-#                 img = Image.open(f).convert('RGB')
-#                 self.cache[index] = (self.dataset.transform(img), self.dataset[index][1])
-#         return self.cache[index]
-
-    # def __len__(self):
-    #     return len(self.dataset)
 
 class CacheDataset(Dataset):
     def __init__(self, dataset):
