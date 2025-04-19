@@ -24,10 +24,6 @@ class PretrainedResnet50:
             return self.model
 
 
-if __name__ == '__main__':
-      p = PretrainedResnet50(10, 2)
-      model = p.get_model()
-      print(model)
 
       
 

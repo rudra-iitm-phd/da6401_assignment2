@@ -83,7 +83,6 @@ def train(log=True , sweep=True):
 
       optimizer = c.configure_optim(model, config['optimizer'], lr = config['learning_rate'], momentum = config['momentum'], weight_decay = config['weight_decay'])
 
-      # optimizer = optim(model.parameters())
       loss_fn = criterion()
       model.train()
 
@@ -158,7 +157,10 @@ if __name__ == '__main__':
       print("Parsing DONE !!")
 
       if args.wandb_sweep:
-            sweep_config = sweep_configuration.sweep_config
+            if args.use_pretrained:
+                  sweep_config = sweep_configuration.sweep_config_resnet50
+            else:
+                  sweep_config = sweep_configuration.sweep_config
             if not args.sweep_id :
                   sweep_id = wandb.sweep(sweep_config, project=config['wandb_project'], entity=config['wandb_entity'])
             else:
