@@ -31,6 +31,7 @@ sweep_config_resnet50 = {
                 "momentum": {"distribution": "uniform", "min": 0.8, "max": 0.99},
                 "weight_decay": {"distribution": "uniform", "min": 0, "max": 1e-2},
                 "augment":{"values":[True, False]},
-                "resize":{"values":[224]}
+                "resize":{"values":[224]},
+                "pretrained_k":{"values":[1, 2, 3]}
             }
         }
