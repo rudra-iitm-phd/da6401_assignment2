@@ -1,8 +1,12 @@
-# 🧠 Image Classification with Custom & Pretrained CNNs
+# 🧠 Image Classification of INaturalist dataset with Custom & Pretrained CNNs
 
 Welcome to this all-in-one pipeline for image classification using PyTorch! Whether you're building from scratch 🛠️ or leveraging the power of pretrained ResNet50 ⚡, this project has you covered. Seamlessly configurable, robustly designed, and integrated with Weights & Biases for tracking 🔍 — it's your perfect companion for image classification projects!
 
 ---
+
+Report link
+
+https://wandb.ai/da24d008-iit-madras/da6401-assignment2/reports/DA6401-Assignment-2--VmlldzoxMjM2ODcyNA?accessToken=4b788jpqey4w9pthrgsdpbpdhgm69d8v68sy15ge9taajhbb0ur7jk2qzqwq3kqo
 
 ## 🚀 Features
 

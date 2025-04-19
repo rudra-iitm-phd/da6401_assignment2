@@ -8,24 +8,26 @@ class CNN(nn.Module):
       def __init__(self, input_size, output_size, filters:list, padding_config:list, stride_config:list, dense_config:list, conv_activation:list, dense_activation:list, kernel_config:list, batch_size:int, batch_norm:bool, dropout:float, xavier_init:bool):
             super(CNN, self).__init__()
 
-            self.filter_config = filters # the number of filters for each convolution layer
-            self.input_size = input_size # width or height : assuming equal width and height of the input image
-            self.input_channel = input_size[1] # number of channels of the input image. For RGB : 3
-            self.output_size = output_size # number of classes 
-            self.padding_config = padding_config # padding to be used in each layer
-            self.stride_config = stride_config # stride to be used in each layer
-            self.dense_config = dense_config # number of neurons to be used in each of the layers of fully connected netwrok
-            self.kernel_config = kernel_config # size of the kernel for each convolutional layer
-            self.batch_size = batch_size # size of the batch eg : 32, 64
-            self.conv_activations = conv_activation # activation functions used for convolutional blocks
+            # Assign hyperparameters and configurations
+            self.filter_config = filters 
+            self.input_size = input_size 
+            self.input_channel = input_size[1] 
+            self.output_size = output_size 
+            self.padding_config = padding_config 
+            self.stride_config = stride_config 
+            self.dense_config = dense_config 
+            self.kernel_config = kernel_config 
+            self.batch_size = batch_size 
+            self.conv_activations = conv_activation 
             print(self.conv_activations)
-            self.dense_activation = dense_activation # activation function used for fully connected networks
+            self.dense_activation = dense_activation 
             print(self.dense_activation)
-            self.batch_norm = batch_norm # Boolean value, True if user opts for batch normalisation
-            self.dropout = dropout # Boolean value, True if user opts for dropout
+            self.batch_norm = batch_norm 
+            self.dropout = dropout 
 
             self.info = dict()
 
+            # Supported activation functions
             self.activations = {
                   'relu':F.relu,
                   'gelu':F.gelu,
@@ -37,29 +39,21 @@ class CNN(nn.Module):
                   'leaky_relu':F.leaky_relu
             }
 
-            self.cnn = self.generate_cnn() # generate the convolutional blocks
-            self.dense = self.generate_dense() # generate the fully connected layers
+            # Generate CNN and dense layers
+            self.cnn = self.generate_cnn() 
+            self.dense = self.generate_dense() 
 
+            # Initialize weights if selected
             if xavier_init:
                   self.cnn = self.xavier_init(self.cnn)
                   self.dense = self.xavier_init(self.dense)
 
-            
-
+      # Construct convolutional layers as per configuration
       def generate_cnn(self) -> dict:
-
-            '''
-            Function for generating the convolutional layers with the 
-            configurations provided by the user
-
-            '''
-
             architecture = nn.ModuleDict()
 
             for i,j in enumerate(self.filter_config):
-
                   architecture[f'Block {i}'] = nn.ModuleDict()
-
                   self.info[i] = dict()
 
                   if i == 0:
@@ -83,16 +77,9 @@ class CNN(nn.Module):
 
             return architecture
 
+      # Construct fully connected layers as per configuration
       def generate_dense(self):
-
-            '''
-            Function for generating the fully connected network with the 
-            configurations provided by the user
-
-            '''
-
             architecture = nn.ModuleDict()
-
             cnn_output_shape = self.filter_config[-1]*(self.info[len(self.filter_config)-1]['op_size']**2)
 
             for i,j in enumerate(self.dense_config):
@@ -112,53 +99,37 @@ class CNN(nn.Module):
                         
             return architecture
 
+      # Apply Xavier initialization to weights
       def xavier_init(self, model):
             for p in model.parameters():
                   if len(p.shape) > 1:
                         nn.init.xavier_uniform_(p)
             return model
 
+      # Forward pass through the CNN and dense layers
       def forward(self, x):
-
-            '''
-            Function for passing the input through the layers of the CNN
-            including the fully connected network
-
-            '''
-
             for i,j in enumerate(self.cnn.keys()):
                   x = (self.cnn[j]['conv'](x))
-                  # print(x.shape)
                   if self.batch_norm:
                         x = self.cnn[j]['batch_norm'](x)
 
                   x = self.activations[self.conv_activations[i]](x)
-
                   x = self.cnn[j]['pool'](x)
-                  # print(x.shape)
                   
             x = x.view(x.size(0), -1)
             for i,j in enumerate(self.dense.keys()):
                   if i == len(self.dense.keys()) - 1:
-                        # x = F.log_softmax(self.dense[j]['linear'](x), dim = -1)
                         x = self.dense[j]['linear'](x)
                   else:
                         x = self.activations[self.dense_activation[i]](self.dense[j]['linear'](x))
                   if self.dropout > 0 and 'dropout' in self.dense[j].keys():
                         x = self.dense[j]['dropout'](x)
-            
 
             return x
 
+      # Visualize intermediate layer outputs of CNN
       def layerwise_visualise(self, x):
-
-            '''
-            Function for visualising the output of the convolution layers 
-
-            '''
-
             vis_images = []
-
             normalise = lambda x : (x - x.min())/(x.max() - x.min())
 
             for i,j in enumerate(self.cnn.keys()):
@@ -180,20 +151,15 @@ class CNN(nn.Module):
                   plt.title(f'{img[1]}')
                   plt.show()
 
-
-
+      # Print detailed summary of the CNN and dense layers
       def view_model_summary(self):
-            '''
-            Function for summarising the model architecture
-
-            '''
             print("Convolutions\n")
             for i in self.cnn.keys():
                   print(i)
                   print(f'Convolution : {self.cnn[i]["conv"]}')
                   if self.batch_norm:
                         print(f'Batch Norm : {self.cnn[i]["batch_norm"]}' )
-                  print(f'Activation : {self.conv_activations[int(i[-1])]}')
+                  print(f'Activation : {self.conv_activations[int(i[-1])]})')
                   print(f'Pooling :{self.cnn[i]["pool"]}')
                   print(f'Output size : {self.info[int(i[-1])]["op_size"]} X {self.info[int(i[-1])]["op_size"]} X {self.filter_config[int(i[-1])]}\n')
                   
@@ -208,11 +174,3 @@ class CNN(nn.Module):
                         print(f'Dropout : {self.dense[i]["dropout"]}')
                   if self.batch_norm and 'batch_norm' in self.dense[i].keys():
                         print(f'Batch Norm : {self.dense[i]["batch_norm"]}' )
-
-
-
-
-
-
-
-
