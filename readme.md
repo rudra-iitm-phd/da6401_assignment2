@@ -40,7 +40,7 @@ Welcome to this all-in-one pipeline for image classification using PyTorch! Whet
 Make sure you have the required dependencies installed:
 
 ```bash
-pip install torch torchvision matplotlib wandb
+pip install torch torchvision matplotlib wandb tqdm
 ```
 
 ## ⚙️ Usage
