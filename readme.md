@@ -4,9 +4,9 @@ Welcome to this all-in-one pipeline for image classification using PyTorch! Whet
 
 ---
 
-Report link
+📘 **[📊 Click here to view the detailed W&B Report →](https://wandb.ai/da24d008-iit-madras/da6401-assignment2/reports/DA6401-Assignment-2--VmlldzoxMjM2ODcyNA?accessToken=4b788jpqey4w9pthrgsdpbpdhgm69d8v68sy15ge9taajhbb0ur7jk2qzqwq3kqo)**
 
-https://wandb.ai/da24d008-iit-madras/da6401-assignment2/reports/DA6401-Assignment-2--VmlldzoxMjM2ODcyNA?accessToken=4b788jpqey4w9pthrgsdpbpdhgm69d8v68sy15ge9taajhbb0ur7jk2qzqwq3kqo
+---
 
 ## 🚀 Features
 
@@ -42,7 +42,54 @@ Make sure you have the required dependencies installed:
 ```bash
 pip install torch torchvision matplotlib wandb
 ```
+
 ## ⚙️ Usage
+
+### 📥 Download the Dataset
+
+Get the **iNaturalist nature_12K** dataset:
+
+👉 [Click to download](https://storage.googleapis.com/wandb_datasets/nature_12K.zip)
+
+Or use the terminal:
+
+```bash
+wget https://storage.googleapis.com/wandb_datasets/nature_12K.zip
+unzip nature_12K.zip
+```
+
+---
+
+### 📦 Clone the Repository
+
+Grab the project source from GitHub:
+
+```bash
+git clone https://github.com/rudra-iitm-phd/da6401_assignment2.git
+```
+
+---
+
+### 🗂️ Directory Structure
+
+Ensure the folder structure looks like this before running:
+
+```
+.
+├── da6401_assignment2     # 📁 Repository code              
+└── nature_12K             # 🗃️ Dataset directory
+```
+
+---
+
+### 🚶 Navigate to the Project
+
+Enter the repository:
+
+```bash
+cd da6401_assignment2
+```
+
 ### 🏋️ Train a Custom CNN
 ```bash
 python train.py
@@ -105,3 +152,39 @@ For a complete list run
 ```bash
 python train.py --help
 ```
+
+### 🧠 Use a Pretrained ResNet50
+
+```bash
+python train.py --wandb --use_pretrained --pretrained_k 2
+```
+
+### 🔍 Launch a W&B Sweep
+
+```bash
+python train.py --wandb_sweep
+```
+---
+
+## 📈 Monitoring with Weights & Biases
+
+Get real-time insights into:
+
+- ✅ Accuracy & Loss Metrics
+- 📊 Visualizations of CNN Layers
+- 🔍 Dataset Sample Previews
+- 🧪 Test Predictions
+- 📎 Sweep Comparisons
+
+Explore it all 👉 [W&B Dashboard](https://wandb.ai/da24d008-iit-madras/da6401-assignment2)
+
+---
+
+## 🧙 Author
+Rudra Sarkar
+---
+
+## 📬 Feedback & Contributions
+
+Pull requests and suggestions are welcome!  
+Let’s make this repo even better 💡✨
